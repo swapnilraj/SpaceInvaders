@@ -30,7 +30,7 @@ public class AlienGroup implements game.Observer {
       aliens.get(i).addObserver(this);
     }
   }
-sss
+
   void draw() {
     this.explodedOne = true;
     for (Alien alien : aliens) {
