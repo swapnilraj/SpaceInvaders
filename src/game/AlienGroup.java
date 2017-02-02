@@ -34,15 +34,13 @@ public class AlienGroup implements game.Observer {
   void draw() {
     this.explodedOne = true;
     for (Alien alien : aliens) {
-      if (!alien.getStatus()) {
-        alien.draw();
-        alien.move();
-        if (parent.frameCount % FRAME_COUNT_EXPLODE == 0 && explodedOne) {
-          int random = (int) (parent.random(-1, 10));
-          if (!aliens.get(random).getStatus()) {
-            aliens.get(random).explode();
-            this.explodedOne = false;
-          }
+      alien.draw();
+      alien.move();
+      if (parent.frameCount % FRAME_COUNT_EXPLODE == 0 && explodedOne) {
+        int random = (int) (parent.random(-1, 10));
+        if (!aliens.get(random).getStatus()) {
+          aliens.get(random).explode();
+          this.explodedOne = false;
         }
       }
     }
