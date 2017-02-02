@@ -21,15 +21,12 @@ public class Alien extends PApplet implements game.Observable {
   private ArrayList<Observer> observers = new ArrayList<Observer>();
 
   public Alien(Space parent, int index, int positionY) {
-    alienImage = parent.loadImage(String.format(Locale.ENGLISH, ALIEN_IMAGE, (int) random(-1, 3)));
+    this.alienImage = parent.loadImage(String.format(Locale.ENGLISH, ALIEN_IMAGE, (int) random(-1, 3)));
     this.index = index;
     this.parent = parent;
-    this.alienImage = parent.loadImage(ALIEN_IMAGE_1);
     this.position = new PVector(parent.width - (index + 1) * alienImage.width, positionY);
     this.velocity = new PVector(-ALIEN_SPEED, ALIEN_SPEED);
-    if (index % 3 == 0) {
-      this.isSinusoidal = true;
-    }
+    this.isSinusoidal = index % 3 == 0;
   }
 
   @Override
