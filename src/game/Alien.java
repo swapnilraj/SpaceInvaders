@@ -50,11 +50,10 @@ public class Alien extends PApplet implements game.Observable {
   public void updateY(int positionYchange) {
     int current = 0;
     while (current <= positionYchange) {
-      position.y = position.y + 1;
+      position.add(0,1);
       ++current;
-      draw();
+      this.draw();
     }
-    velocity.x += SPEED_UP;
   }
 
   public void changeDirection() {
@@ -66,9 +65,15 @@ public class Alien extends PApplet implements game.Observable {
   }
 
   public void draw() {
-    if (!hasExploded)
-    parent.image(alienImage, position.x,
-        (isSinusoidal) ? getYPosition(position.x) + position.y : position.y);
+    if (!hasExploded) {
+      System.out.println(position);
+      parent.image(alienImage, position.x,
+          (isSinusoidal) ? getYPosition(position.x) + position.y : position.y);
+    }
+  }
+
+  public void speedUp(int speedFactor) {
+    velocity.x += speedFactor;
   }
 
   private float getYPosition(float positionX) {
@@ -77,11 +82,13 @@ public class Alien extends PApplet implements game.Observable {
   }
 
   public void move() {
-    if (position.x + alienImage.width / 2 <= alienImage.width
-        || position.x + alienImage.width / 2 >= parent.width) {
-      notifyObserver();
+    if (!hasExploded) {
+      if (position.x + alienImage.width / 2 <= alienImage.width
+          || position.x + alienImage.width / 2 >= parent.width) {
+        notifyObserver();
+      }
+      position.x += velocity.x;
     }
-    position.x += velocity.x;
   }
 
   public void explode() {

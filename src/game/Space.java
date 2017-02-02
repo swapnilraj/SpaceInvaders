@@ -6,8 +6,8 @@ import static game.Constants.*;
 
 public class Space extends PApplet {
 
-  private AlienGroup group;
-
+  private AlienGroup group1;
+  private AlienGroup group2;
 
   public void settings() {
     fullScreen();
@@ -17,12 +17,14 @@ public class Space extends PApplet {
     noStroke();
     noCursor();
     imageMode(CENTER);
-    group = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
+    group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
+    group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN * 3);
   }
 
   public void draw() {
     background(BACKGROUND_COLOR.getRGB());
-    group.draw();
+    group1.draw();
+    group2.draw();
   }
 
   public static void main(String[] args) {

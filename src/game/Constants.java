@@ -11,6 +11,6 @@ public class Constants {
   public static final int FRAME_COUNT_EXPLODE = 300;
   public static final int MARGIN = 20;
   public static final int SCALING_SINE = 10;
-  public static final int SPEED_UP = 0;
+  public static final int SPEED_UP = 1;
   public static final int DEFAULT_GROUP_SIZE = 10;
 }
