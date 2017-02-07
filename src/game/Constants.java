@@ -12,5 +12,6 @@ public class Constants {
   public static final int MARGIN = 20;
   public static final int SCALING_SINE = 10;
   public static final int SPEED_UP = 1;
+  public static final String PLAYER_IMAGE = "player.png";
   public static final int DEFAULT_GROUP_SIZE = 10;
 }
