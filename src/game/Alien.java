@@ -66,7 +66,7 @@ public class Alien extends PApplet implements game.Observable {
 
   public void draw() {
     if (!hasExploded) {
-      System.out.println(position);
+      //System.out.println(position);
       parent.image(alienImage, position.x,
           (isSinusoidal) ? getYPosition(position.x) + position.y : position.y);
     }

@@ -30,6 +30,10 @@ public class Space extends PApplet {
     player.draw();
   }
 
+  public void mousePressed() {
+    System.out.println("TEST");
+  }
+
   public static void main(String[] args) {
     PApplet.main(Space.class.getName());
   }
