@@ -11,7 +11,6 @@ public class AlienGroup implements game.Observer {
   private ArrayList<Alien> aliens;
   private int changeY;
   private Space parent;
-  private boolean explodedOne;
 
   @Override
   public void update(int index) {
@@ -34,7 +33,7 @@ public class AlienGroup implements game.Observer {
   }
 
   void draw() {
-    this.explodedOne = true;
+    boolean explodedOne = true;
     for (Alien alien : aliens) {
       alien.draw();
       alien.move();
@@ -42,7 +41,7 @@ public class AlienGroup implements game.Observer {
         int random = (int) (parent.random(-1, 10));
         if (!aliens.get(random).getStatus()) {
           aliens.get(random).explode();
-          this.explodedOne = false;
+          explodedOne = false;
         }
       }
     }
