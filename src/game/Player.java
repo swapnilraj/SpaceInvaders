@@ -21,6 +21,7 @@ public class Player implements game.Observer {
   public void update(int index) {
     PVector bulletPosition = new PVector(parent.mouseX, position.y);
     bullets.add(new Bullet(parent, bulletPosition));
+    this.draw();
   }
 
   Player(Space parent) {
@@ -28,6 +29,7 @@ public class Player implements game.Observer {
     this.playerImg = parent.loadImage(PLAYER_IMAGE);
     this.position = new PVector(parent.mouseX, parent.height - MARGIN);
     this.bullets = new ArrayList<>();
+    this.parent.addObserver(this);
   }
 
   public void draw() {
