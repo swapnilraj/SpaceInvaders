@@ -1,11 +1,13 @@
 package game;
 
+import game.util.Observable;
+import game.util.Observer;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
 import static game.Constants.*;
 
-public class Space extends PApplet implements game.Observable {
+public class Space extends PApplet implements Observable {
 
   private AlienGroup group1;
   private AlienGroup group2;

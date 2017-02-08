@@ -1,5 +1,7 @@
 package game;
 
+import game.util.Observable;
+import game.util.Observer;
 import java.util.ArrayList;
 import java.util.Locale;
 import processing.core.PApplet;
@@ -8,7 +10,7 @@ import processing.core.PVector;
 
 import static game.Constants.*;
 
-public class Alien extends PApplet implements game.Observable {
+public class Alien extends PApplet implements Observable {
 
   private PImage alienImage;
   private Space parent;

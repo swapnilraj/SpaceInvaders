@@ -1,5 +1,6 @@
 package game;
 
+import game.util.Observer;
 import java.util.ArrayList;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -10,7 +11,7 @@ import static game.Constants.PLAYER_IMAGE;
 /**
  * Created by thawne on 07/02/17.
  */
-public class Player implements game.Observer {
+public class Player implements Observer {
 
   private Space parent;
   private PImage playerImg;
