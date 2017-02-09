@@ -5,7 +5,6 @@ import processing.core.PVector;
 
 import static game.Constants.ALIEN_EXPLODE_IMAGE;
 import static game.Constants.DEFAULT_GROUP_SIZE;
-import static game.Constants.ALIEN_IMAGE;
 import static game.Constants.BULLET_IMAGE;
 import static game.Constants.BULLET_SPEED;
 
@@ -14,7 +13,6 @@ public class Bullet {
   private PImage bulletImg;
   private Space parent;
   private PVector position;
-  //private AlienGroup group;
 
   Bullet(Space parent, PVector position) {
     this.parent = parent;
@@ -40,7 +38,9 @@ public class Bullet {
           && position.x <= alienPosition.x + currentAlien.alienImage.width / 2
           && position.y >= alienPosition.y - currentAlien.alienImage.height / 2
           && position.y <= alienPosition.y + currentAlien.alienImage.height / 2) {
-        System.out.println("Collide");
+        if (!currentAlien.getStatus()) {
+          currentAlien.explode();
+        }
       }
     }
   }

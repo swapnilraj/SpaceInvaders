@@ -38,13 +38,6 @@ public class AlienGroup implements Observer {
     for (Alien alien : aliens) {
       alien.draw();
       alien.move();
-      if (parent.frameCount % FRAME_COUNT_EXPLODE == 0 && explodedOne) {
-        int random = (int) (parent.random(-1, 10));
-        if (!aliens.get(random).getStatus()) {
-          //aliens.get(random).explode();
-          explodedOne = false;
-        }
-      }
     }
   }
 }
