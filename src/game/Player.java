@@ -17,6 +17,7 @@ public class Player implements Observer {
   private PImage playerImg;
   private PVector position;
   private ArrayList<Bullet> bullets;
+  private AlienGroup group;
 
   @Override
   public void update(int index) {
@@ -25,7 +26,8 @@ public class Player implements Observer {
     this.draw();
   }
 
-  Player(Space parent) {
+  Player(Space parent, AlienGroup group) {
+    this.group = group;
     this.parent = parent;
     this.playerImg = parent.loadImage(PLAYER_IMAGE);
     this.position = new PVector(parent.mouseX, parent.height - MARGIN);
@@ -35,9 +37,10 @@ public class Player implements Observer {
 
   public void draw() {
     parent.image(playerImg, parent.mouseX, position.y);
-    for (Bullet bullet : bullets) {
-      bullet.draw();
-      bullet.move();
+    for (int index = 0; index< bullets.size(); ++index) {
+      bullets.get(index).draw();
+      bullets.get(index).move();
+      bullets.get(index).collide(group);
     }
   }
 }

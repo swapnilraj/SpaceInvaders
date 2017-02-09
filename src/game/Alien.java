@@ -12,7 +12,7 @@ import static game.Constants.*;
 
 public class Alien extends PApplet implements Observable {
 
-  private PImage alienImage;
+  public PImage alienImage;
   private Space parent;
   private PVector position;
   private PVector velocity;
@@ -29,7 +29,7 @@ public class Alien extends PApplet implements Observable {
     this.parent = parent;
     this.position = new PVector(parent.width - (index + 1) * alienImage.width, positionY);
     this.velocity = new PVector(-ALIEN_SPEED, ALIEN_SPEED);
-    this.isSinusoidal = index % 3 == 0;
+    this.isSinusoidal = index % 3 == 4;
   }
 
   @Override
@@ -54,7 +54,6 @@ public class Alien extends PApplet implements Observable {
     while (current <= positionYchange) {
       position.add(0,1);
       ++current;
-      this.draw();
     }
   }
 
@@ -97,6 +96,10 @@ public class Alien extends PApplet implements Observable {
     hasExploded = true;
     this.alienImage = parent.loadImage(ALIEN_EXPLODE_IMAGE);
     draw();
+  }
+
+  public PVector getPosition() {
+    return position;
   }
 
   public static void main(String[] args) {

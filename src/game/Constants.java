@@ -14,6 +14,6 @@ public class Constants {
   public static final int SPEED_UP = 1;
   public static final String PLAYER_IMAGE = "player.png";
   public static final String BULLET_IMAGE = "bullet.png";
-  public static final int BULLET_SPEED = 2;
+  public static final int BULLET_SPEED = 10;
   public static final int DEFAULT_GROUP_SIZE = 10;
 }

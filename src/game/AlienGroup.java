@@ -9,7 +9,7 @@ import static game.Constants.SPEED_UP;
 
 public class AlienGroup implements Observer {
 
-  private ArrayList<Alien> aliens;
+  public ArrayList<Alien> aliens;
   private int changeY;
   private Space parent;
 
@@ -41,7 +41,7 @@ public class AlienGroup implements Observer {
       if (parent.frameCount % FRAME_COUNT_EXPLODE == 0 && explodedOne) {
         int random = (int) (parent.random(-1, 10));
         if (!aliens.get(random).getStatus()) {
-          aliens.get(random).explode();
+          //aliens.get(random).explode();
           explodedOne = false;
         }
       }

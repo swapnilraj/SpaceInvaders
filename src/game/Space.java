@@ -27,18 +27,16 @@ public class Space extends PApplet implements Observable {
     this.bulletCount = 0;
     this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
     this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN * 3);
-    this.player = new Player(this);
+    this.player = new Player(this, group1);
   }
 
   public void draw() {
     background(BACKGROUND_COLOR.getRGB());
     group1.draw();
-    group2.draw();
     player.draw();
   }
 
   public void mousePressed() {
-    System.out.println("TEST");
     notifyObserver();
   }
 
