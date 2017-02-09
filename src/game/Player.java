@@ -37,7 +37,7 @@ public class Player implements Observer {
 
   public void draw() {
     parent.image(playerImg, parent.mouseX, position.y);
-    for (int index = 0; index< bullets.size(); ++index) {
+    for (int index = 0; index < bullets.size(); ++index) {
       bullets.get(index).draw();
       bullets.get(index).move();
       bullets.get(index).collide(group);

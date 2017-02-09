@@ -13,6 +13,8 @@ import static game.Constants.*;
 public class Alien extends PApplet implements Observable {
 
   public PImage alienImage;
+  public PImage powerUpImage;
+  public boolean dropPower;
   private Space parent;
   private PVector position;
   private PVector velocity;
@@ -23,6 +25,8 @@ public class Alien extends PApplet implements Observable {
   private ArrayList<Observer> observers = new ArrayList<Observer>();
 
   public Alien(Space parent, int index, int positionY) {
+    this.dropPower = false;
+    this.powerUpImage = parent.loadImage(POWER_IMAGE);
     this.alienImage =
         parent.loadImage(String.format(Locale.ENGLISH, ALIEN_IMAGE, (int) random(-1, 3)));
     this.index = index;
@@ -52,7 +56,7 @@ public class Alien extends PApplet implements Observable {
   public void updateY(int positionYchange) {
     int current = 0;
     while (current <= positionYchange) {
-      position.add(0,1);
+      position.add(0, 1);
       ++current;
     }
   }
@@ -70,6 +74,9 @@ public class Alien extends PApplet implements Observable {
       //System.out.println(position);
       parent.image(alienImage, position.x,
           (isSinusoidal) ? getYPosition(position.x) + position.y : position.y);
+    }
+    if (dropPower) {
+      parent.image(powerUpImage, position.x, position.y);
     }
   }
 
@@ -90,11 +97,15 @@ public class Alien extends PApplet implements Observable {
       }
       position.x += velocity.x;
     }
+    if (dropPower) {
+      position.add(0, velocity.y);
+    }
   }
 
   public void explode() {
     hasExploded = true;
     this.alienImage = parent.loadImage(ALIEN_EXPLODE_IMAGE);
+    this.dropPower = true;
     draw();
   }
 

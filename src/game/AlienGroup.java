@@ -34,7 +34,6 @@ public class AlienGroup implements Observer {
   }
 
   void draw() {
-    boolean explodedOne = true;
     for (Alien alien : aliens) {
       alien.draw();
       alien.move();
