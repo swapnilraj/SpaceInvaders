@@ -5,7 +5,9 @@ import game.util.Observer;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
-import static game.Constants.*;
+import static game.Constants.BACKGROUND_COLOR;
+import static game.Constants.DEFAULT_GROUP_SIZE;
+import static game.Constants.MARGIN;
 
 public class Space extends PApplet implements Observable {
 

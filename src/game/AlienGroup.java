@@ -4,7 +4,6 @@ import game.util.Observer;
 import java.util.ArrayList;
 
 import static game.Constants.ALIEN_HEIGHT;
-import static game.Constants.FRAME_COUNT_EXPLODE;
 import static game.Constants.SPEED_UP;
 
 public class AlienGroup implements Observer {
@@ -21,7 +20,6 @@ public class AlienGroup implements Observer {
       aliens.get(i).changeDirection();
       aliens.get(i).updateY(changeY);
       aliens.get(i).speedUp(SPEED_UP);
-
     }
   }
 

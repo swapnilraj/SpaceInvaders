@@ -4,10 +4,9 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static game.Constants.ALIEN_EXPLODE_IMAGE;
-import static game.Constants.DEFAULT_GROUP_SIZE;
 import static game.Constants.BULLET_IMAGE;
 import static game.Constants.BULLET_SPEED;
-import static game.Constants.MARGIN;
+import static game.Constants.DEFAULT_GROUP_SIZE;
 
 public class Bullet {
 
@@ -18,7 +17,7 @@ public class Bullet {
   Bullet(Space parent, PVector position) {
     this.parent = parent;
     this.position = position;
-    this.bulletImg = this.parent.loadImage(ALIEN_EXPLODE_IMAGE);
+    this.bulletImg = this.parent.loadImage(BULLET_IMAGE);
   }
 
   public void draw() {

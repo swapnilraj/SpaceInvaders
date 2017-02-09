@@ -8,7 +8,11 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import static game.Constants.*;
+import static game.Constants.ALIEN_EXPLODE_IMAGE;
+import static game.Constants.ALIEN_IMAGE;
+import static game.Constants.ALIEN_SPEED;
+import static game.Constants.POWER_IMAGE;
+import static game.Constants.SCALING_SINE;
 
 public class Alien extends PApplet implements Observable {
 
