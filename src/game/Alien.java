@@ -37,7 +37,7 @@ public class Alien extends PApplet implements Observable {
     this.parent = parent;
     this.position = new PVector(parent.width - (index + 1) * alienImage.width, positionY);
     this.velocity = new PVector(-ALIEN_SPEED, ALIEN_SPEED);
-    this.isSinusoidal = index % 3 == 4;
+    this.isSinusoidal = index % 3 == 0;
   }
 
   @Override

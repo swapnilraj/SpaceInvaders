@@ -58,7 +58,6 @@ public class Player implements Observer {
           && position.x <= alien.position.x + alien.powerUpImage.width / 2
           && position.y >= alien.position.y - alien.powerUpImage.height / 2
           && position.y <= alien.position.y + alien.powerUpImage.height / 2) {
-        System.out.println("Power up");
         this.hasPoweredUp = true;
       }
     }
