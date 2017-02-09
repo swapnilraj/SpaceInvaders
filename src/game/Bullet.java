@@ -3,7 +3,6 @@ package game;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import static game.Constants.ALIEN_EXPLODE_IMAGE;
 import static game.Constants.BULLET_IMAGE;
 import static game.Constants.BULLET_SPEED;
 import static game.Constants.DEFAULT_GROUP_SIZE;
