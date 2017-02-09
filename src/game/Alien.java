@@ -71,7 +71,6 @@ public class Alien extends PApplet implements Observable {
 
   public void draw() {
     if (!hasExploded) {
-      //System.out.println(position);
       parent.image(alienImage, position.x,
           (isSinusoidal) ? getYPosition(position.x) + position.y : position.y);
     }
@@ -81,8 +80,7 @@ public class Alien extends PApplet implements Observable {
         dropPower = false;
       }
     }
-
-    }
+  }
 
   public void speedUp(int speedFactor) {
     velocity.x += speedFactor;

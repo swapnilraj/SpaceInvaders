@@ -18,11 +18,16 @@ public class Player implements Observer {
   public PVector position;
   private ArrayList<Bullet> bullets;
   private AlienGroup group;
+  private boolean hasPoweredUp;
 
   @Override
   public void update(int index) {
     PVector bulletPosition = new PVector(parent.mouseX, position.y);
     bullets.add(new Bullet(parent, bulletPosition));
+    if (hasPoweredUp) {
+      bulletPosition.add(20, 0);
+      bullets.add(new Bullet(parent, bulletPosition));
+    }
     this.draw();
   }
 
@@ -33,6 +38,7 @@ public class Player implements Observer {
     this.position = new PVector(parent.mouseX, parent.height - MARGIN);
     this.bullets = new ArrayList<>();
     this.parent.addObserver(this);
+    this.hasPoweredUp = false;
   }
 
   public void draw() {
@@ -53,6 +59,7 @@ public class Player implements Observer {
           && position.y >= alien.position.y - alien.powerUpImage.height / 2
           && position.y <= alien.position.y + alien.powerUpImage.height / 2) {
         System.out.println("Power up");
+        this.hasPoweredUp = true;
       }
     }
   }
