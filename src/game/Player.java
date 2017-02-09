@@ -14,8 +14,8 @@ import static game.Constants.PLAYER_IMAGE;
 public class Player implements Observer {
 
   private Space parent;
-  private PImage playerImg;
-  private PVector position;
+  public PImage playerImg;
+  public PVector position;
   private ArrayList<Bullet> bullets;
   private AlienGroup group;
 
@@ -36,11 +36,24 @@ public class Player implements Observer {
   }
 
   public void draw() {
-    parent.image(playerImg, parent.mouseX, position.y);
+    position.x = parent.mouseX;
+    parent.image(playerImg, position.x, position.y);
     for (int index = 0; index < bullets.size(); ++index) {
       bullets.get(index).draw();
       bullets.get(index).move();
       bullets.get(index).collide(group);
+    }
+  }
+
+  public void collide() {
+    ArrayList<Alien> aliens = group.aliens;
+    for (Alien alien : aliens) {
+      if (position.x >= alien.position.x - alien.powerUpImage.width / 2
+          && position.x <= alien.position.x + alien.powerUpImage.width / 2
+          && position.y >= alien.position.y - alien.powerUpImage.height / 2
+          && position.y <= alien.position.y + alien.powerUpImage.height / 2) {
+        System.out.println("Power up");
+      }
     }
   }
 }

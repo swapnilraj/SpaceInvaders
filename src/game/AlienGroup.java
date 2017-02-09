@@ -12,6 +12,7 @@ public class AlienGroup implements Observer {
   public ArrayList<Alien> aliens;
   private int changeY;
   private Space parent;
+  Player player;
 
   @Override
   public void update(int index) {
@@ -20,10 +21,11 @@ public class AlienGroup implements Observer {
       aliens.get(i).changeDirection();
       aliens.get(i).updateY(changeY);
       aliens.get(i).speedUp(SPEED_UP);
+
     }
   }
 
-  AlienGroup(Space parent, int size, int positionY) {
+  AlienGroup(Space parent, int size, int positionY, Player player) {
     this.parent = parent;
     this.aliens = new ArrayList<>(size);
     this.changeY = ALIEN_HEIGHT;

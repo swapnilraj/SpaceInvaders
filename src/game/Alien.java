@@ -16,7 +16,7 @@ public class Alien extends PApplet implements Observable {
   public PImage powerUpImage;
   public boolean dropPower;
   private Space parent;
-  private PVector position;
+  public PVector position;
   private PVector velocity;
   private int index;
   private boolean hasExploded;
@@ -77,8 +77,12 @@ public class Alien extends PApplet implements Observable {
     }
     if (dropPower) {
       parent.image(powerUpImage, position.x, position.y);
+      if (position.y > parent.height) {
+        dropPower = false;
+      }
     }
-  }
+
+    }
 
   public void speedUp(int speedFactor) {
     velocity.x += speedFactor;

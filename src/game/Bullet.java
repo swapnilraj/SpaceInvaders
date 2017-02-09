@@ -21,7 +21,7 @@ public class Bullet {
   }
 
   public void draw() {
-    if (position.x > 0) {
+    if (position.y > 0) {
       parent.image(bulletImg, position.x, position.y);
     }
   }

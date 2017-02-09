@@ -25,8 +25,8 @@ public class Space extends PApplet implements Observable {
     imageMode(CENTER);
     this.observers = new ArrayList<>();
     this.bulletCount = 0;
-    this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
-    this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN * 3);
+    this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN, player);
+    this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN * 3, player);
     this.player = new Player(this, group1);
   }
 
@@ -34,6 +34,7 @@ public class Space extends PApplet implements Observable {
     background(BACKGROUND_COLOR.getRGB());
     group1.draw();
     player.draw();
+    player.collide();
   }
 
   public void mousePressed() {
