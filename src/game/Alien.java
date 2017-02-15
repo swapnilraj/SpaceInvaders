@@ -81,6 +81,7 @@ public class Alien implements Observable {
   public void draw() {
     if (!hasExploded) {
       if (!bomb.getDropState() && (int) parent.random(2000) == 2) {
+        bomb.updatePosition(position.x, position.y);
         bomb.setDrop();
       }
       parent.image(alienImage, position.x,
@@ -128,6 +129,7 @@ public class Alien implements Observable {
   public void explode() {
     hasExploded = true;
     this.alienImage = parent.loadImage(ALIEN_EXPLODE_IMAGE);
+    powerUp.updatePosition(position.x, position.y);
     powerUp.setDrop();
     draw();
     notifyObserver(ALIEN_DEATH);

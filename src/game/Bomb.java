@@ -22,6 +22,10 @@ public class Bomb {
     this.toDrop = false;
   }
 
+  public void updatePosition(float positionX, float positionY) {
+    this.position = new PVector(positionX, positionY);
+  }
+
   public void draw() {
     parent.image(bomb, this.position.x, this.position.y);
   }
