@@ -25,6 +25,7 @@ public class Alien extends PApplet implements Observable {
   private int index;
   private boolean hasExploded;
   private boolean isSinusoidal;
+  private PowerUp powerUp;
 
   private ArrayList<Observer> observers = new ArrayList<Observer>();
 
@@ -79,8 +80,9 @@ public class Alien extends PApplet implements Observable {
           (isSinusoidal) ? getYPosition(position.x) + position.y : position.y);
     }
     if (dropPower) {
-      parent.image(powerUpImage, position.x, position.y);
-      if (position.y > parent.height) {
+      powerUp.draw();
+      //parent.image(powerUpImage, position.x, position.y);
+      if (powerUp.offscreen()) {
         dropPower = false;
       }
     }
@@ -104,7 +106,8 @@ public class Alien extends PApplet implements Observable {
       position.x += velocity.x;
     }
     if (dropPower) {
-      position.add(0, velocity.y);
+      //position.add(0, velocity.y);
+      powerUp.move();
     }
   }
 
@@ -112,6 +115,7 @@ public class Alien extends PApplet implements Observable {
     hasExploded = true;
     this.alienImage = parent.loadImage(ALIEN_EXPLODE_IMAGE);
     this.dropPower = true;
+    powerUp = new PowerUp(parent, position, POWER_IMAGE);
     draw();
   }
 
