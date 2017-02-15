@@ -68,6 +68,7 @@ public class Bomb {
           && position.x <= shield.position.x + shield.shieldImage.width / 2
           && position.y >= shield.position.y - shield.shieldImage.height / 2
           && position.y <= shield.position.y + shield.shieldImage.height / 2) {
+        position.y = parent.height + bomb.height;
         shield.hit();
       }
     }

@@ -52,6 +52,7 @@ public class Bullet {
           && position.y >= shield.position.y - shield.shieldImage.height / 2
           && position.y <= shield.position.y + shield.shieldImage.height / 2) {
         shield.hit();
+        position.y -= shield.shieldImage.height;
       }
     }
   }
