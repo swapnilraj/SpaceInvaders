@@ -15,5 +15,6 @@ public class Constants {
   public static final String BULLET_IMAGE = "explode.GIF";
   public static final int BULLET_SPEED = 10;
   public static final String POWER_IMAGE = "power.png";
+  public static final String BOMB_IMAGE = "bomb.png";
   public static final int DEFAULT_GROUP_SIZE = 10;
 }
