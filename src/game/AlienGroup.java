@@ -2,7 +2,6 @@ package game;
 
 import game.util.Observable;
 import game.util.Observer;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 import static game.Constants.ALIEN_DEATH;

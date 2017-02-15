@@ -33,7 +33,7 @@ public class Space extends PApplet implements Observable, Observer {
     noStroke();
     noCursor();
     imageMode(CENTER);
-    gameMessage = createFont("Impact", 32);
+    textSize(32);
     this.observers = new ArrayList<>();
     this.shields = new ArrayList<>();
     this.bulletCount = 0;
@@ -59,7 +59,6 @@ public class Space extends PApplet implements Observable, Observer {
 
   public void alienDeath() {
     background(0);
-    textFont(gameMessage);
     textAlign(CENTER, CENTER);
     text(WIN_MESSAGE, width / 2, height / 2);
     noLoop();
@@ -67,7 +66,6 @@ public class Space extends PApplet implements Observable, Observer {
 
   public void playerDeath() {
     background(0);
-    textFont(gameMessage);
     textAlign(CENTER, CENTER);
     text(LOSE_MESSAGE, width / 2, height / 2);
     noLoop();

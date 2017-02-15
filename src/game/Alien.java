@@ -41,8 +41,8 @@ public class Alien implements Observable {
     this.position = new PVector(parent.width - (index + 1) * alienImage.width, positionY);
     this.velocity = new PVector(-ALIEN_SPEED, 0);
     this.isSinusoidal = index % 3 == 0;
-    this.powerUp = new PowerUp(this.parent, this.position, POWER_IMAGE);
-    this.bomb = new Bomb(this.parent, this.position, BOMB_IMAGE);
+    this.powerUp = new PowerUp(this.parent, position.x, position.y, POWER_IMAGE);
+    this.bomb = new Bomb(this.parent, position.x, position.y, BOMB_IMAGE);
   }
 
   @Override

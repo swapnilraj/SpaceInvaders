@@ -13,7 +13,6 @@ public class Shield {
   public PVector position;
   public PImage shieldImage;
   private int hitCount;
-  private boolean toDraw;
 
   Shield(Space parent, int index, int maxShieldCount) {
     this.parent = parent;
@@ -21,12 +20,15 @@ public class Shield {
     this.position = new PVector((index * parent.width / maxShieldCount) + shieldImage.width,
         parent.height - 8 * MARGIN);
     this.hitCount = 0;
-    this.toDraw = true;
   }
 
   public void draw() {
     if (hitCount < MAX_HIT_BREAK) {
       parent.image(shieldImage, position.x, position.y);
     }
+  }
+
+  public void hit() {
+    ++this.hitCount;
   }
 }

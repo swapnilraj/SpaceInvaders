@@ -15,9 +15,9 @@ public class Bomb {
   Bomb() {
   }
 
-  Bomb(Space parent, PVector position, String imageLocation) {
+  Bomb(Space parent, float positionX, float positionY, String imageLocation) {
     this.bomb = parent.loadImage(imageLocation);
-    this.position = position;
+    this.position = new PVector(positionX, positionY);
     this.parent = parent;
     this.toDrop = false;
   }
