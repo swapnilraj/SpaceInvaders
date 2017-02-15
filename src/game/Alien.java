@@ -11,10 +11,14 @@ import processing.core.PVector;
 import static game.Constants.ALIEN_EXPLODE_IMAGE;
 import static game.Constants.ALIEN_IMAGE;
 import static game.Constants.ALIEN_SPEED;
+import static game.Constants.BOMB_IMAGE;
 import static game.Constants.POWER_IMAGE;
 import static game.Constants.SCALING_SINE;
 
-public class Alien extends PApplet implements Observable {
+import static processing.core.PApplet.map;
+import static processing.core.PApplet.sin;
+
+public class Alien implements Observable {
 
   public PImage alienImage;
   private Space parent;
@@ -24,18 +28,20 @@ public class Alien extends PApplet implements Observable {
   private boolean hasExploded;
   private boolean isSinusoidal;
   public PowerUp powerUp;
+  public Bomb bomb;
 
   private ArrayList<Observer> observers = new ArrayList<Observer>();
 
   Alien(Space parent, int index, int positionY) {
     this.alienImage =
-        parent.loadImage(String.format(Locale.ENGLISH, ALIEN_IMAGE, (int) random(-1, 3)));
+        parent.loadImage(String.format(Locale.ENGLISH, ALIEN_IMAGE, (int) parent.random(-1, 3)));
     this.index = index;
     this.parent = parent;
     this.position = new PVector(parent.width - (index + 1) * alienImage.width, positionY);
-    this.velocity = new PVector(-ALIEN_SPEED, ALIEN_SPEED);
+    this.velocity = new PVector(-ALIEN_SPEED, 0);
     this.isSinusoidal = index % 3 == 0;
-    this.powerUp = new PowerUp(parent, position, POWER_IMAGE);
+    this.powerUp = new PowerUp(this.parent, this.position, POWER_IMAGE);
+    this.bomb = new Bomb(this.parent, this.position, BOMB_IMAGE);
   }
 
   @Override
@@ -72,7 +78,12 @@ public class Alien extends PApplet implements Observable {
   }
 
   public void draw() {
+    if (index == 4)
+    System.out.println(position);
     if (!hasExploded) {
+      if (!bomb.getDropState() && (int) parent.random(20) == 2) {
+        bomb.setDrop();
+      }
       parent.image(alienImage, position.x,
           (isSinusoidal) ? getYPosition(position.x) + position.y : position.y);
     }
@@ -82,6 +93,12 @@ public class Alien extends PApplet implements Observable {
         powerUp.unSetDrop();
       }
     }
+    if (bomb.getDropState()) {
+      bomb.draw();
+      if (bomb.offscreen()) {
+        bomb.unSetDrop();
+      }
+    }
   }
 
   public void speedUp(int speedFactor) {
@@ -89,7 +106,7 @@ public class Alien extends PApplet implements Observable {
   }
 
   private float getYPosition(float positionX) {
-    float temp = map(positionX, 0, width + 1, 0, 6.28f);
+    float temp = map(positionX, 0, parent.width + 1, 0, 6.28f);
     return SCALING_SINE * sin(temp);
   }
 
@@ -103,6 +120,9 @@ public class Alien extends PApplet implements Observable {
     }
     if (powerUp.getDropState()) {
       powerUp.move();
+    }
+    if (bomb.getDropState()) {
+      bomb.move();
     }
   }
 
