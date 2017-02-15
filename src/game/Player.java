@@ -60,6 +60,12 @@ public class Player implements Observer {
           && position.y <= alien.powerUp.position.y + alien.powerUp.bomb.height / 2) {
         this.hasPoweredUp = true;
       }
+      if (position.x >= alien.bomb.position.x - alien.bomb.bomb.width / 2
+          && position.x <= alien.bomb.position.x + alien.bomb.bomb.width / 2
+          && position.y >= alien.bomb.position.y - alien.bomb.bomb.height / 2
+          && position.y <= alien.bomb.position.y + alien.bomb.bomb.height / 2) {
+        System.out.println("DEBUFF");
+      }
     }
   }
 }

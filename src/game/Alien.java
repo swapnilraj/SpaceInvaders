@@ -78,10 +78,8 @@ public class Alien implements Observable {
   }
 
   public void draw() {
-    if (index == 4)
-    System.out.println(position);
     if (!hasExploded) {
-      if (!bomb.getDropState() && (int) parent.random(20) == 2) {
+      if (!bomb.getDropState() && (int) parent.random(2000) == 2) {
         bomb.setDrop();
       }
       parent.image(alienImage, position.x,
@@ -116,13 +114,13 @@ public class Alien implements Observable {
           || position.x + alienImage.width / 2 >= parent.width) {
         notifyObserver();
       }
-      position.x += velocity.x;
+      this.position.x += velocity.x;
     }
     if (powerUp.getDropState()) {
       powerUp.move();
     }
     if (bomb.getDropState()) {
-      bomb.move();
+      bomb.position.y += 2;
     }
   }
 
