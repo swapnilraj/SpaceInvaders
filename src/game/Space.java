@@ -5,10 +5,12 @@ import game.util.Observer;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
+import static game.Constants.ALIEN_DEATH;
 import static game.Constants.BACKGROUND_COLOR;
 import static game.Constants.DEFAULT_GROUP_SIZE;
 import static game.Constants.MARGIN;
 import static game.Constants.MAX_SHIELD_COUNT;
+import static game.Constants.PLAYER_DEATH;
 
 public class Space extends PApplet implements Observable, Observer {
 
@@ -32,6 +34,7 @@ public class Space extends PApplet implements Observable, Observer {
     this.bulletCount = 0;
     this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
     this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
+    group1.addObserver(this);
     for (int index = 0; index < MAX_SHIELD_COUNT; ++index) {
       shields.add(new Shield(this, index, MAX_SHIELD_COUNT));
     }
@@ -49,8 +52,16 @@ public class Space extends PApplet implements Observable, Observer {
     }
   }
 
+  public void alienDeath() {
+    noLoop();
+  }
+
+  public void playerDeath() {
+    noLoop();
+  }
+
   public void mousePressed() {
-    notifyObserver();
+    notifyObserver(0);
   }
 
   public static void main(String[] args) {
@@ -68,13 +79,17 @@ public class Space extends PApplet implements Observable, Observer {
   }
 
   @Override
-  public void notifyObserver() {
+  public void notifyObserver(int value) {
     for (Observer observer : observers) {
       observer.update(bulletCount++);
     }
   }
 
   @Override public void update(int index) {
-    System.out.println("UPDATE IN SPACE");
+    if (index == ALIEN_DEATH) {
+      alienDeath();
+    } else if (index == PLAYER_DEATH) {
+      playerDeath();
+    }
   }
 }

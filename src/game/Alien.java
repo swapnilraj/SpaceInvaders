@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import static game.Constants.ALIEN_DEATH;
 import static game.Constants.ALIEN_EXPLODE_IMAGE;
 import static game.Constants.ALIEN_IMAGE;
 import static game.Constants.ALIEN_SPEED;
@@ -55,9 +56,9 @@ public class Alien implements Observable {
   }
 
   @Override
-  public void notifyObserver() {
+  public void notifyObserver(int value) {
     for (Observer observer : observers) {
-      observer.update(index);
+      observer.update(value);
     }
   }
 
@@ -112,7 +113,7 @@ public class Alien implements Observable {
     if (!hasExploded) {
       if (position.x + alienImage.width / 2 <= alienImage.width
           || position.x + alienImage.width / 2 >= parent.width) {
-        notifyObserver();
+        notifyObserver(index);
       }
       this.position.x += velocity.x;
     }
@@ -129,6 +130,7 @@ public class Alien implements Observable {
     this.alienImage = parent.loadImage(ALIEN_EXPLODE_IMAGE);
     powerUp.setDrop();
     draw();
+    notifyObserver(ALIEN_DEATH);
   }
 
   public PVector getPosition() {

@@ -7,6 +7,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static game.Constants.MARGIN;
+import static game.Constants.PLAYER_DEATH;
 import static game.Constants.PLAYER_IMAGE;
 
 public class Player implements Observer, Observable {
@@ -41,9 +42,9 @@ public class Player implements Observer, Observable {
   }
 
   @Override
-  public void notifyObserver() {
+  public void notifyObserver(int value) {
     for (Observer observer : observers) {
-      observer.update(9);
+      observer.update(value);
     }
   }
 
@@ -81,7 +82,7 @@ public class Player implements Observer, Observable {
           && position.x <= alien.bomb.position.x + alien.bomb.bomb.width / 2
           && position.y >= alien.bomb.position.y - alien.bomb.bomb.height / 2
           && position.y <= alien.bomb.position.y + alien.bomb.bomb.height / 2) {
-        notifyObserver();
+        notifyObserver(PLAYER_DEATH);
       }
     }
   }

@@ -6,5 +6,5 @@ public interface Observable {
 
   void removeObserver(Observer o);
 
-  void notifyObserver();
+  void notifyObserver(int index);
 }
