@@ -10,7 +10,7 @@ import static game.Constants.DEFAULT_GROUP_SIZE;
 import static game.Constants.MARGIN;
 import static game.Constants.MAX_SHIELD_COUNT;
 
-public class Space extends PApplet implements Observable {
+public class Space extends PApplet implements Observable, Observer {
 
   private AlienGroup group1;
   private AlienGroup group2;
@@ -30,12 +30,13 @@ public class Space extends PApplet implements Observable {
     this.observers = new ArrayList<>();
     this.shields = new ArrayList<>();
     this.bulletCount = 0;
-    this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN, player);
-    this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN, player);
+    this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
+    this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
     for (int index = 0; index < MAX_SHIELD_COUNT; ++index) {
       shields.add(new Shield(this, index, MAX_SHIELD_COUNT));
     }
     this.player = new Player(this, group1);
+    player.addObserver(this);
   }
 
   public void draw() {
@@ -71,5 +72,9 @@ public class Space extends PApplet implements Observable {
     for (Observer observer : observers) {
       observer.update(bulletCount++);
     }
+  }
+
+  @Override public void update(int index) {
+    System.out.println("UPDATE IN SPACE");
   }
 }

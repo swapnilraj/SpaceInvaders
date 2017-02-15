@@ -11,7 +11,6 @@ public class AlienGroup implements Observer {
   public ArrayList<Alien> aliens;
   private int changeY;
   private Space parent;
-  Player player;
 
   @Override
   public void update(int index) {
@@ -23,7 +22,7 @@ public class AlienGroup implements Observer {
     }
   }
 
-  AlienGroup(Space parent, int size, int positionY, Player player) {
+  AlienGroup(Space parent, int size, int positionY) {
     this.parent = parent;
     this.aliens = new ArrayList<>(size);
     this.changeY = ALIEN_HEIGHT;

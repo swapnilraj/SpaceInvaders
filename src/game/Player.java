@@ -1,5 +1,6 @@
 package game;
 
+import game.util.Observable;
 import game.util.Observer;
 import java.util.ArrayList;
 import processing.core.PImage;
@@ -8,7 +9,7 @@ import processing.core.PVector;
 import static game.Constants.MARGIN;
 import static game.Constants.PLAYER_IMAGE;
 
-public class Player implements Observer {
+public class Player implements Observer, Observable {
 
   private Space parent;
   public PImage playerImg;
@@ -16,6 +17,7 @@ public class Player implements Observer {
   private ArrayList<Bullet> bullets;
   private AlienGroup group;
   private boolean hasPoweredUp;
+  private ArrayList<Observer> observers;
 
   @Override
   public void update(int index) {
@@ -28,6 +30,23 @@ public class Player implements Observer {
     this.draw();
   }
 
+  @Override
+  public void addObserver(Observer o) {
+    observers.add(o);
+  }
+
+  @Override
+  public void removeObserver(Observer o) {
+    observers.remove(o);
+  }
+
+  @Override
+  public void notifyObserver() {
+    for (Observer observer : observers) {
+      observer.update(9);
+    }
+  }
+
   Player(Space parent, AlienGroup group) {
     this.group = group;
     this.parent = parent;
@@ -36,6 +55,7 @@ public class Player implements Observer {
     this.bullets = new ArrayList<>();
     this.parent.addObserver(this);
     this.hasPoweredUp = false;
+    this.observers = new ArrayList<>();
   }
 
   public void draw() {
@@ -61,7 +81,7 @@ public class Player implements Observer {
           && position.x <= alien.bomb.position.x + alien.bomb.bomb.width / 2
           && position.y >= alien.bomb.position.y - alien.bomb.bomb.height / 2
           && position.y <= alien.bomb.position.y + alien.bomb.bomb.height / 2) {
-        System.out.println("DEBUFF");
+        notifyObserver();
       }
     }
   }
