@@ -32,10 +32,10 @@ public class Space extends PApplet implements Observable {
     this.bulletCount = 0;
     this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN, player);
     this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN, player);
-    this.player = new Player(this, group1);
     for (int index = 0; index < MAX_SHIELD_COUNT; ++index) {
       shields.add(new Shield(this, index, MAX_SHIELD_COUNT));
     }
+    this.player = new Player(this, group1);
   }
 
   public void draw() {

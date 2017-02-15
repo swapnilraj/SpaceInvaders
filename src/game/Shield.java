@@ -11,14 +11,20 @@ public class Shield {
   private Space parent;
   private PVector position;
   private PImage shieldImage;
+  private int hitCount;
 
   Shield(Space parent, int index, int maxShieldCount) {
     this.parent = parent;
-    position = new PVector((index + 1) * parent.width / maxShieldCount, parent.height - 8 * MARGIN);
+    this.position = new PVector((index + 1) * parent.width / maxShieldCount, parent.height - 8 * MARGIN);
+    this.hitCount = 0;
     this.shieldImage = parent.loadImage(SHIELD_IMAGE);
   }
 
   public void draw() {
     parent.image(shieldImage, position.x, position.y);
+  }
+
+  public void hit() {
+    ++this.hitCount;
   }
 }
