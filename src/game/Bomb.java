@@ -12,7 +12,8 @@ public class Bomb {
   private Space parent;
   private boolean toDrop;
 
-  Bomb() {}
+  Bomb() {
+  }
 
   Bomb(Space parent, PVector position, String imageLocation) {
     this.bomb = parent.loadImage(imageLocation);
@@ -44,7 +45,4 @@ public class Bomb {
   public boolean getDropState() {
     return toDrop;
   }
-
-
-
 }

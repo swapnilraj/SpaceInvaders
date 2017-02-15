@@ -17,9 +17,11 @@ public class Constants {
   public static final String POWER_IMAGE = "power.png";
   public static final String BOMB_IMAGE = "bomb.png";
   public static final String SHIELD_IMAGE = "shield.png";
+  public static final int DEFAULT_GROUP_SIZE = 10;
   public static final int MAX_SHIELD_COUNT = 4;
   public static final int MAX_HIT_BREAK = 4;
   public static final int ALIEN_DEATH = -1;
   public static final int PLAYER_DEATH = -2;
-  public static final int DEFAULT_GROUP_SIZE = 10;
+  public static final String WIN_MESSAGE = "You Win!";
+  public static final String LOSE_MESSAGE = "Game Over!";
 }
