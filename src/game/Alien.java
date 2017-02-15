@@ -122,7 +122,7 @@ public class Alien implements Observable {
       powerUp.move();
     }
     if (bomb.getDropState()) {
-      bomb.position.y += 2;
+      bomb.move();
     }
   }
 
