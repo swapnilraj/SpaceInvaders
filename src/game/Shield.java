@@ -15,9 +15,9 @@ public class Shield {
 
   Shield(Space parent, int index, int maxShieldCount) {
     this.parent = parent;
-    this.position = new PVector((index + 1) * parent.width / maxShieldCount, parent.height - 8 * MARGIN);
-    this.hitCount = 0;
     this.shieldImage = parent.loadImage(SHIELD_IMAGE);
+    this.position = new PVector((index * parent.width / maxShieldCount) + shieldImage.width, parent.height - 8 * MARGIN);
+    this.hitCount = 0;
   }
 
   public void draw() {
