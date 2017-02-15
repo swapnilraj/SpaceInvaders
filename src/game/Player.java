@@ -24,10 +24,10 @@ public class Player implements Observer, Observable {
   @Override
   public void update(int index) {
     PVector bulletPosition = new PVector(parent.mouseX, position.y);
-    bullets.add(new Bullet(parent, bulletPosition));
+    bullets.add(new Bullet(parent, bulletPosition, shields));
     if (hasPoweredUp) {
       bulletPosition.add(20, 0);
-      bullets.add(new Bullet(parent, bulletPosition));
+      bullets.add(new Bullet(parent, bulletPosition, shields));
     }
     this.draw();
   }

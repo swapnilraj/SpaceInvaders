@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import processing.core.PImage;
 import processing.core.PVector;
 
@@ -12,11 +13,13 @@ public class Bullet {
   private PImage bulletImg;
   private Space parent;
   private PVector position;
+  private ArrayList<Shield> shields;
 
-  Bullet(Space parent, PVector position) {
+  Bullet(Space parent, PVector position, ArrayList<Shield> shields) {
     this.parent = parent;
     this.position = position;
     this.bulletImg = this.parent.loadImage(BULLET_IMAGE);
+    this.shields = shields;
   }
 
   public void draw() {
@@ -40,6 +43,15 @@ public class Bullet {
         if (!currentAlien.getStatus()) {
           currentAlien.explode();
         }
+      }
+    }
+    for (int index = 0; index < shields.size(); ++index) {
+      Shield shield = shields.get(index);
+      if (position.x >= shield.position.x - shield.shieldImage.width / 2
+          && position.x <= shield.position.x + shield.shieldImage.width / 2
+          && position.y >= shield.position.y - shield.shieldImage.height / 2
+          && position.y <= shield.position.y + shield.shieldImage.height / 2) {
+        shield.hit();
       }
     }
   }
