@@ -23,11 +23,11 @@ public class Alien extends PApplet implements Observable {
   private int index;
   private boolean hasExploded;
   private boolean isSinusoidal;
-  private PowerUp powerUp;
+  public PowerUp powerUp;
 
   private ArrayList<Observer> observers = new ArrayList<Observer>();
 
-  public Alien(Space parent, int index, int positionY) {
+  Alien(Space parent, int index, int positionY) {
     this.alienImage =
         parent.loadImage(String.format(Locale.ENGLISH, ALIEN_IMAGE, (int) random(-1, 3)));
     this.index = index;

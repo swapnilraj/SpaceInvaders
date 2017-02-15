@@ -6,7 +6,7 @@ import processing.core.PVector;
 import static game.Constants.ALIEN_SPEED;
 
 public class Bomb {
-  private PImage bomb;
+  public PImage bomb;
   private PVector position;
   private PVector velocity;
   private Space parent;
