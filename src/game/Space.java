@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import static game.Constants.BACKGROUND_COLOR;
 import static game.Constants.DEFAULT_GROUP_SIZE;
 import static game.Constants.MARGIN;
+import static game.Constants.MAX_SHIELD_COUNT;
 
 public class Space extends PApplet implements Observable {
 
@@ -15,6 +16,7 @@ public class Space extends PApplet implements Observable {
   private AlienGroup group2;
   private Player player;
   private int bulletCount;
+  private ArrayList<Shield> shields;
   private ArrayList<Observer> observers;
 
   public void settings() {
@@ -26,10 +28,14 @@ public class Space extends PApplet implements Observable {
     noCursor();
     imageMode(CENTER);
     this.observers = new ArrayList<>();
+    this.shields = new ArrayList<>();
     this.bulletCount = 0;
     this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN, player);
-    this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN * 3, player);
+    this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN, player);
     this.player = new Player(this, group1);
+    for (int index = 0; index < MAX_SHIELD_COUNT; ++index) {
+      shields.add(new Shield(this, index, MAX_SHIELD_COUNT));
+    }
   }
 
   public void draw() {
@@ -37,6 +43,9 @@ public class Space extends PApplet implements Observable {
     group1.draw();
     player.draw();
     player.collide();
+    for (Shield shield : shields) {
+      shield.draw();
+    }
   }
 
   public void mousePressed() {

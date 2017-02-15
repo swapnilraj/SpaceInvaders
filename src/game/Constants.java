@@ -17,5 +17,6 @@ public class Constants {
   public static final String POWER_IMAGE = "power.png";
   public static final String BOMB_IMAGE = "bomb.png";
   public static final String SHIELD_IMAGE = "shield.png";
+  public static final int MAX_SHIELD_COUNT = 3;
   public static final int DEFAULT_GROUP_SIZE = 10;
 }
