@@ -4,7 +4,6 @@ import game.util.Observable;
 import game.util.Observer;
 import java.util.ArrayList;
 import processing.core.PApplet;
-import processing.core.PFont;
 
 import static game.Constants.ALIEN_DEATH;
 import static game.Constants.BACKGROUND_COLOR;
@@ -23,7 +22,6 @@ public class Space extends PApplet implements Observable, Observer {
   private int bulletCount;
   private ArrayList<Shield> shields;
   private ArrayList<Observer> observers;
-  private PFont gameMessage;
 
   public void settings() {
     fullScreen();
@@ -37,12 +35,12 @@ public class Space extends PApplet implements Observable, Observer {
     this.observers = new ArrayList<>();
     this.shields = new ArrayList<>();
     this.bulletCount = 0;
-    this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
-    this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
-    group1.addObserver(this);
     for (int index = 0; index < MAX_SHIELD_COUNT; ++index) {
       shields.add(new Shield(this, index, MAX_SHIELD_COUNT));
     }
+    this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
+    group1.addObserver(this);
+    this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
     this.player = new Player(this, group1, shields);
     player.addObserver(this);
   }
@@ -97,10 +95,13 @@ public class Space extends PApplet implements Observable, Observer {
   }
 
   @Override public void update(int index) {
-    if (index == ALIEN_DEATH) {
-      alienDeath();
-    } else if (index == PLAYER_DEATH) {
-      playerDeath();
+    switch (index) {
+      case ALIEN_DEATH:
+        alienDeath();
+        break;
+      case PLAYER_DEATH:
+        playerDeath();
+        break;
     }
   }
 }
