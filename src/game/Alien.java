@@ -17,8 +17,6 @@ import static game.Constants.SCALING_SINE;
 public class Alien extends PApplet implements Observable {
 
   public PImage alienImage;
-  public PImage powerUpImage;
-  public boolean dropPower;
   private Space parent;
   public PVector position;
   private PVector velocity;
@@ -30,8 +28,6 @@ public class Alien extends PApplet implements Observable {
   private ArrayList<Observer> observers = new ArrayList<Observer>();
 
   public Alien(Space parent, int index, int positionY) {
-    this.dropPower = false;
-    this.powerUpImage = parent.loadImage(POWER_IMAGE);
     this.alienImage =
         parent.loadImage(String.format(Locale.ENGLISH, ALIEN_IMAGE, (int) random(-1, 3)));
     this.index = index;
@@ -39,6 +35,7 @@ public class Alien extends PApplet implements Observable {
     this.position = new PVector(parent.width - (index + 1) * alienImage.width, positionY);
     this.velocity = new PVector(-ALIEN_SPEED, ALIEN_SPEED);
     this.isSinusoidal = index % 3 == 0;
+    this.powerUp = new PowerUp(parent, position, POWER_IMAGE);
   }
 
   @Override
@@ -79,11 +76,10 @@ public class Alien extends PApplet implements Observable {
       parent.image(alienImage, position.x,
           (isSinusoidal) ? getYPosition(position.x) + position.y : position.y);
     }
-    if (dropPower) {
+    if (powerUp.getDropState()) {
       powerUp.draw();
-      //parent.image(powerUpImage, position.x, position.y);
       if (powerUp.offscreen()) {
-        dropPower = false;
+        powerUp.unSetDrop();
       }
     }
   }
@@ -105,8 +101,7 @@ public class Alien extends PApplet implements Observable {
       }
       position.x += velocity.x;
     }
-    if (dropPower) {
-      //position.add(0, velocity.y);
+    if (powerUp.getDropState()) {
       powerUp.move();
     }
   }
@@ -114,8 +109,7 @@ public class Alien extends PApplet implements Observable {
   public void explode() {
     hasExploded = true;
     this.alienImage = parent.loadImage(ALIEN_EXPLODE_IMAGE);
-    this.dropPower = true;
-    powerUp = new PowerUp(parent, position, POWER_IMAGE);
+    powerUp.setDrop();
     draw();
   }
 

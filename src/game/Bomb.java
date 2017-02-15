@@ -10,14 +10,16 @@ public class Bomb {
   private PVector position;
   private PVector velocity;
   private Space parent;
+  private boolean toDrop;
 
-  Bomb() {};
+  Bomb() {}
 
   Bomb(Space parent, PVector position, String imageLocation) {
     this.bomb = parent.loadImage(imageLocation);
     this.velocity = new PVector(ALIEN_SPEED, ALIEN_SPEED);
     this.position = position;
     this.parent = parent;
+    this.toDrop = false;
   }
 
   public void draw() {
@@ -30,6 +32,18 @@ public class Bomb {
 
   public boolean offscreen() {
     return position.y > parent.height;
+  }
+
+  public void setDrop() {
+    this.toDrop = true;
+  }
+
+  public void unSetDrop() {
+    this.toDrop = false;
+  }
+
+  public boolean getDropState() {
+    return toDrop;
   }
 
 }
