@@ -12,6 +12,7 @@ public class AlienGroup implements Observer, Observable {
 
   public ArrayList<Alien> aliens;
   private ArrayList<Observer> observers;
+  private ArrayList<Shield> shields;
   private int changeY;
   private Space parent;
   private int deathCount;
@@ -49,14 +50,15 @@ public class AlienGroup implements Observer, Observable {
     }
   }
 
-  AlienGroup(Space parent, int size, int positionY) {
+  AlienGroup(Space parent, int size, int positionY, ArrayList<Shield> shields) {
     this.deathCount = 0;
     this.parent = parent;
     this.observers = new ArrayList<>();
     this.aliens = new ArrayList<>(size);
     this.changeY = ALIEN_HEIGHT;
+    this.shields = shields;
     for (int i = 0; i < size; ++i) {
-      aliens.add(new Alien(parent, i, positionY));
+      aliens.add(new Alien(parent, i, positionY, shields));
       aliens.get(i).addObserver(this);
     }
   }

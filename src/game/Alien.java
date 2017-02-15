@@ -33,7 +33,7 @@ public class Alien implements Observable {
 
   private ArrayList<Observer> observers = new ArrayList<Observer>();
 
-  Alien(Space parent, int index, int positionY) {
+  Alien(Space parent, int index, int positionY, ArrayList<Shield> shields) {
     this.alienImage =
         parent.loadImage(String.format(Locale.ENGLISH, ALIEN_IMAGE, (int) parent.random(-1, 3)));
     this.index = index;
@@ -42,7 +42,7 @@ public class Alien implements Observable {
     this.velocity = new PVector(-ALIEN_SPEED, 0);
     this.isSinusoidal = index % 3 == 0;
     this.powerUp = new PowerUp(this.parent, position.x, position.y, POWER_IMAGE);
-    this.bomb = new Bomb(this.parent, position.x, position.y, BOMB_IMAGE);
+    this.bomb = new Bomb(this.parent, position.x, position.y, BOMB_IMAGE, shields);
   }
 
   @Override
@@ -95,6 +95,7 @@ public class Alien implements Observable {
     }
     if (bomb.getDropState()) {
       bomb.draw();
+      bomb.collide();
       if (bomb.offscreen()) {
         bomb.unSetDrop();
       }

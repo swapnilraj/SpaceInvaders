@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import processing.core.PImage;
 import processing.core.PVector;
 
@@ -11,6 +12,7 @@ public class Bomb {
 
   private Space parent;
   private boolean toDrop;
+  private ArrayList<Shield> shields;
 
   Bomb() {
   }
@@ -20,6 +22,15 @@ public class Bomb {
     this.position = new PVector(positionX, positionY);
     this.parent = parent;
     this.toDrop = false;
+  }
+
+  Bomb(Space parent, float positionX, float positionY, String imageLocation,
+      ArrayList<Shield> shields) {
+    this.bomb = parent.loadImage(imageLocation);
+    this.position = new PVector(positionX, positionY);
+    this.parent = parent;
+    this.toDrop = false;
+    this.shields = shields;
   }
 
   public void updatePosition(float positionX, float positionY) {
@@ -48,5 +59,17 @@ public class Bomb {
 
   public boolean getDropState() {
     return toDrop;
+  }
+
+  public void collide() {
+    for (int index = 0; index < shields.size(); ++index) {
+      Shield shield = shields.get(index);
+      if (position.x >= shield.position.x - shield.shieldImage.width / 2
+          && position.x <= shield.position.x + shield.shieldImage.width / 2
+          && position.y >= shield.position.y - shield.shieldImage.height / 2
+          && position.y <= shield.position.y + shield.shieldImage.height / 2) {
+        shield.hit();
+      }
+    }
   }
 }
