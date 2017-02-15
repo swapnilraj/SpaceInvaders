@@ -16,6 +16,7 @@ public class Player implements Observer, Observable {
   public PImage playerImg;
   public PVector position;
   private ArrayList<Bullet> bullets;
+  private ArrayList<Shield> shields;
   private AlienGroup group;
   private boolean hasPoweredUp;
   private ArrayList<Observer> observers;
@@ -48,7 +49,7 @@ public class Player implements Observer, Observable {
     }
   }
 
-  Player(Space parent, AlienGroup group) {
+  Player(Space parent, AlienGroup group, ArrayList<Shield> shields) {
     this.group = group;
     this.parent = parent;
     this.playerImg = parent.loadImage(PLAYER_IMAGE);
@@ -57,6 +58,7 @@ public class Player implements Observer, Observable {
     this.parent.addObserver(this);
     this.hasPoweredUp = false;
     this.observers = new ArrayList<>();
+    this.shields = shields;
   }
 
   public void draw() {

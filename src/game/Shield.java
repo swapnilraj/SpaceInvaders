@@ -4,27 +4,29 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 import static game.Constants.MARGIN;
+import static game.Constants.MAX_HIT_BREAK;
 import static game.Constants.SHIELD_IMAGE;
 
 public class Shield {
 
   private Space parent;
-  private PVector position;
-  private PImage shieldImage;
+  public PVector position;
+  public PImage shieldImage;
   private int hitCount;
+  private boolean toDraw;
 
   Shield(Space parent, int index, int maxShieldCount) {
     this.parent = parent;
     this.shieldImage = parent.loadImage(SHIELD_IMAGE);
-    this.position = new PVector((index * parent.width / maxShieldCount) + shieldImage.width, parent.height - 8 * MARGIN);
+    this.position = new PVector((index * parent.width / maxShieldCount) + shieldImage.width,
+        parent.height - 8 * MARGIN);
     this.hitCount = 0;
+    this.toDraw = true;
   }
 
   public void draw() {
-    parent.image(shieldImage, position.x, position.y);
-  }
-
-  public void hit() {
-    ++this.hitCount;
+    if (hitCount < MAX_HIT_BREAK) {
+      parent.image(shieldImage, position.x, position.y);
+    }
   }
 }

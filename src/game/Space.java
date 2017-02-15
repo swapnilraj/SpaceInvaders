@@ -38,7 +38,7 @@ public class Space extends PApplet implements Observable, Observer {
     for (int index = 0; index < MAX_SHIELD_COUNT; ++index) {
       shields.add(new Shield(this, index, MAX_SHIELD_COUNT));
     }
-    this.player = new Player(this, group1);
+    this.player = new Player(this, group1, shields);
     player.addObserver(this);
   }
 
