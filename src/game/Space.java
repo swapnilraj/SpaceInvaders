@@ -74,6 +74,7 @@ public class Space extends PApplet implements Observable, Observer {
   public void keyPressed () {
     if (key == ' ') {
       setup();
+      loop();
     }
   }
 
