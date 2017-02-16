@@ -30,5 +30,9 @@ public class Shield {
 
   public void hit() {
     ++this.hitCount;
+    if (hitCount >= MAX_HIT_BREAK) {
+      position.x = -1;
+      position.y = parent.height *2;
+    }
   }
 }
