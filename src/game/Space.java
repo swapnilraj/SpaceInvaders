@@ -5,13 +5,13 @@ import ddf.minim.Minim;
 import game.util.Observable;
 import game.util.Observer;
 import java.util.ArrayList;
-import java.util.Objects;
 import processing.core.PApplet;
 
 import static game.Constants.ALIEN_DEATH;
 import static game.Constants.BACKGROUND_COLOR;
 import static game.Constants.BACKGROUND_MUSIC;
 import static game.Constants.BULLET_MUSIC;
+import static game.Constants.DEATH_MUSIC;
 import static game.Constants.DEFAULT_GROUP_SIZE;
 import static game.Constants.LOSE_MESSAGE;
 import static game.Constants.MARGIN;
@@ -27,9 +27,11 @@ public class Space extends PApplet implements Observable, Observer {
   private ArrayList<Shield> shields;
   private ArrayList<Observer> observers;
   public Minim minim;
+
   private AudioPlayer backgroundSound;
   private AudioPlayer bulletSound1;
   private AudioPlayer bulletSound2;
+  private AudioPlayer endSound;
 
   public void settings() {
     fullScreen();
@@ -45,6 +47,7 @@ public class Space extends PApplet implements Observable, Observer {
     backgroundSound.loop();
     bulletSound1 = minim.loadFile(BULLET_MUSIC);
     bulletSound2 = minim.loadFile(BULLET_MUSIC);
+    endSound = minim.loadFile(DEATH_MUSIC);
     this.observers = new ArrayList<>();
     this.shields = new ArrayList<>();
     this.bulletCount = 0;
@@ -76,6 +79,8 @@ public class Space extends PApplet implements Observable, Observer {
 
   private void playerDeath() {
     background(0);
+    backgroundSound.pause();
+    endSound.loop();
     textAlign(CENTER, CENTER);
     text(LOSE_MESSAGE, width / 2, height / 2);
     noLoop();

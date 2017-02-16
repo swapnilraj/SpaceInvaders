@@ -1,10 +1,12 @@
 package game;
 
+import ddf.minim.AudioPlayer;
 import java.util.ArrayList;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import static game.Constants.BULLET_IMAGE;
+import static game.Constants.BULLET_SOUND;
 import static game.Constants.BULLET_SPEED;
 import static game.Constants.DEFAULT_GROUP_SIZE;
 
@@ -13,6 +15,7 @@ public class Bullet {
   private PImage bulletImg;
   private Space parent;
   private PVector position;
+  private AudioPlayer bulletSound;
   private ArrayList<Shield> shields;
 
   Bullet(Space parent, PVector position, ArrayList<Shield> shields) {
@@ -20,6 +23,7 @@ public class Bullet {
     this.position = position;
     this.bulletImg = this.parent.loadImage(BULLET_IMAGE);
     this.shields = shields;
+    this.bulletSound = parent.minim.loadFile(BULLET_SOUND);
   }
 
   public void draw() {
@@ -40,6 +44,8 @@ public class Bullet {
           && position.x <= alienPosition.x + currentAlien.alienImage.width / 2
           && position.y >= alienPosition.y - currentAlien.alienImage.height / 2
           && position.y <= alienPosition.y + currentAlien.alienImage.height / 2) {
+        bulletSound.play();
+        bulletSound.rewind();
         if (!currentAlien.getStatus()) {
           currentAlien.explode();
         }

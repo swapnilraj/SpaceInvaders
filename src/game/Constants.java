@@ -24,6 +24,8 @@ public class Constants {
   public static final int PLAYER_DEATH = -2;
   public static final String BACKGROUND_MUSIC = "background.wav";
   public static final String BULLET_MUSIC = "pew.mp3";
+  public static final String DEATH_MUSIC = "death.wav";
+  public static final String BULLET_SOUND = "monsterkill.mp3";
   public static final String WIN_MESSAGE = "You Win!";
   public static final String LOSE_MESSAGE = "Game Over!";
 }
