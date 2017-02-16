@@ -2,7 +2,6 @@ package game;
 
 import game.util.Observable;
 import game.util.Observer;
-import java.awt.Event;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
@@ -18,7 +17,6 @@ import static game.Constants.WIN_MESSAGE;
 public class Space extends PApplet implements Observable, Observer {
 
   private AlienGroup group1;
-  private AlienGroup group2;
   private Player player;
   private int bulletCount;
   private ArrayList<Shield> shields;
@@ -41,7 +39,6 @@ public class Space extends PApplet implements Observable, Observer {
     }
     this.group1 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN, shields);
     group1.addObserver(this);
-    //this.group2 = new AlienGroup(this, DEFAULT_GROUP_SIZE, MARGIN);
     this.player = new Player(this, group1, shields);
     player.addObserver(this);
   }
@@ -56,14 +53,14 @@ public class Space extends PApplet implements Observable, Observer {
     }
   }
 
-  public void alienDeath() {
+  private void alienDeath() {
     background(0);
     textAlign(CENTER, CENTER);
     text(WIN_MESSAGE, width / 2, height / 2);
     noLoop();
   }
 
-  public void playerDeath() {
+  private void playerDeath() {
     background(0);
     textAlign(CENTER, CENTER);
     text(LOSE_MESSAGE, width / 2, height / 2);

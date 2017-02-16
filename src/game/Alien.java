@@ -15,7 +15,6 @@ import static game.Constants.ALIEN_SPEED;
 import static game.Constants.BOMB_IMAGE;
 import static game.Constants.POWER_IMAGE;
 import static game.Constants.SCALING_SINE;
-
 import static processing.core.PApplet.map;
 import static processing.core.PApplet.sin;
 
