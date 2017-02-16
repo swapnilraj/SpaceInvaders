@@ -1,12 +1,17 @@
 package game;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import game.util.Observable;
 import game.util.Observer;
 import java.util.ArrayList;
+import java.util.Objects;
 import processing.core.PApplet;
 
 import static game.Constants.ALIEN_DEATH;
 import static game.Constants.BACKGROUND_COLOR;
+import static game.Constants.BACKGROUND_MUSIC;
+import static game.Constants.BULLET_MUSIC;
 import static game.Constants.DEFAULT_GROUP_SIZE;
 import static game.Constants.LOSE_MESSAGE;
 import static game.Constants.MARGIN;
@@ -21,6 +26,10 @@ public class Space extends PApplet implements Observable, Observer {
   private int bulletCount;
   private ArrayList<Shield> shields;
   private ArrayList<Observer> observers;
+  public Minim minim;
+  private AudioPlayer backgroundSound;
+  private AudioPlayer bulletSound1;
+  private AudioPlayer bulletSound2;
 
   public void settings() {
     fullScreen();
@@ -31,6 +40,11 @@ public class Space extends PApplet implements Observable, Observer {
     noCursor();
     imageMode(CENTER);
     textSize(32);
+    minim = new Minim(this);
+    backgroundSound = minim.loadFile(BACKGROUND_MUSIC);
+    backgroundSound.loop();
+    bulletSound1 = minim.loadFile(BULLET_MUSIC);
+    bulletSound2 = minim.loadFile(BULLET_MUSIC);
     this.observers = new ArrayList<>();
     this.shields = new ArrayList<>();
     this.bulletCount = 0;
@@ -69,9 +83,16 @@ public class Space extends PApplet implements Observable, Observer {
 
   public void mousePressed() {
     notifyObserver(0);
+    if (!bulletSound1.isPlaying()) {
+      bulletSound1.play();
+      bulletSound1.rewind();
+    } else {
+      bulletSound2.play();
+      bulletSound2.rewind();
+    }
   }
 
-  public void keyPressed () {
+  public void keyPressed() {
     if (key == ' ') {
       setup();
       loop();
