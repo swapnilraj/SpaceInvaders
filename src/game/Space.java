@@ -2,6 +2,7 @@ package game;
 
 import game.util.Observable;
 import game.util.Observer;
+import java.awt.Event;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
@@ -71,6 +72,12 @@ public class Space extends PApplet implements Observable, Observer {
 
   public void mousePressed() {
     notifyObserver(0);
+  }
+
+  public void keyPressed () {
+    if (key == ' ') {
+      setup();
+    }
   }
 
   public static void main(String[] args) {
